@@ -18,15 +18,17 @@ class Flip extends Component {
     }
 
     flipCoin() {
-        Math.random() < 0.5 
-        ? this.setState(curState => { 
-                return {flipCount: curState.flipCount+1, headCount: curState.headCount+1, result: 0}
-            })
-        : this.setState(curState => { 
-                return {flipCount: curState.flipCount+1, tailCount: curState.tailCount+1, result: 1}
-            })
+        // 0 heads, 1 tails
+        let side = (Math.random() < 0.5 ? 0 : 1)
+        this.setState(curState => {
+            return {
+                flipCount: curState.flipCount+1,
+                headCount: curState.headCount + (side === 0 ? 1 : 0),
+                tailCount: curState.tailCount + (side === 1 ? 1 : 0),
+                result: side
+            }
+        })
     } 
-
     
     render() {
         return ( 
