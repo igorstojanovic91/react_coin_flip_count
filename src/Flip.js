@@ -11,14 +11,21 @@ class Flip extends Component {
         this.state = {
             flipCount: 0,
             headCount: 0,
-            tailCount: 0
+            tailCount: 0,
+            result: ''
         }
         this.flipCoin = this.flipCoin.bind(this)
     }
 
     flipCoin() {
-        return Math.random() < 0.5 ? 0 : 1
-    }
+        Math.random() < 0.5 
+        ? this.setState(curState => { 
+                return {flipCount: curState.flipCount+1, headCount: curState.headCount+1, result: 0}
+            })
+        : this.setState(curState => { 
+                return {flipCount: curState.flipCount+1, tailCount: curState.tailCount+1, result: 1}
+            })
+    } 
 
     
     render() {
@@ -26,8 +33,12 @@ class Flip extends Component {
         return ( 
         <div>
             <h1>{this.props.title}</h1>
-            <Coin img={this.props.imgs[this.flipCoin()]} test="test" />
-            <button onClcik={this.flipCoin}>Flip me!</button>
+            <Coin img={this.props.imgs[this.state.result]} 
+            headCount={this.state.headCount}
+            tailCount={this.state.tailCount}
+            flipCount={this.state.flipCount}
+             />
+            <button onClick={this.flipCoin}>Flip me!</button>
         </div>
 
         )
