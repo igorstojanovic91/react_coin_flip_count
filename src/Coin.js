@@ -4,10 +4,12 @@ import './Coin.css'
 class Coin extends Component {
 
     render() {
-        let str = `Out of ${this.props.flipCount}, there have been ${this.props.headCount} heads and ${this.props.tailCount} tails`
+        let str = this.props.flipCount === 0 ? '' : `Out of ${this.props.flipCount} flips,
+         there have been ${this.props.headCount > 1 ? `${this.props.headCount} heads` : `${this.props.headCount} head`}
+         and ${this.props.tailCount > 1 ? `${this.props.tailCount} tails` : `${this.props.tailCount} tail`}`
         let img = this.props.img !== undefined 
         ? <img className="Coin-image" src={this.props.img} alt="Coin"/>
-        : <img />
+        : <img alt=""/>
 
         return (
             <div>
